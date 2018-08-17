@@ -2,6 +2,12 @@
   font-family: 'Open Sans';
 /*  text-align: center;*/
 }
+
+#profile_pic
+img {
+    width: auto;
+    height: auto;
+}
 .myheader
 {
 text-align: center;
