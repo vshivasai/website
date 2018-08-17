@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>mlrit virtual tour</title>
+    <meta name="description" content="">
+     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> 
+ body {
+    -moz-transform: scale(0.8, 0.8); 
+    zoom: 0.8; 
+    zoom: 80%; 
+}
+</head>
+
+<body>
+<a-scene>
+    <a-assets>
+        <img id="entry" src="15.jpg">
+        <img id="left-room" src="2.jpg">
+        <img id="left-corner" src="3.jpg">
+        <img id="right-corner" src="4.jpg">
+        <img id="right-room" src="5.jpg">
+        <img id="main-block" src="6.jpg"> 
+        <img id="ground" src="7.jpg">  
+        <img id="parking" src="8.jpg">
+        <img id="hall" src="9.jpg">
+        <img id="canteen-entry" src="10.jpg">
+        <img id="girls-hostel" src="11.jpg">
+        <img id="lab-road" src="12.jpg">
+        <img id="lab-entry" src="13.jpg">
+        <img id="lab-exit" src="14.jpg">
+        <img id="icon" src="uparrow.png">
+        <img id="icon2" src="downarrow.png">
+        <img id="icon4" src="rightarrow.png">
+        <img id="icon3" src="leftarrow.png">
+      
+    </a-assets>
+    <a-image id="front-arrow" src="#icon" position="0 2.5 -4"></a-image>
+    <a-image id="back-arrow" src="#icon2" position="0 -2.5 -4"></a-image>
+   <a-image id="left-arrow" src="#icon3" position="-5 -0.5 -5"></a-image>
+   <a-image id="right-arrow" src="#icon4" position="5 -0.5 -5"></a-image>
+
+    <a-entity position="0 0 0" rotation="0 0 0">
+        <a-entity camera look-controls wasd-controls>
+            <a-entity position="0 0 -2" scale="0.2 0.2 0.2"
+                      geometry="primitive: ring; radiusOuter: 0.20;radiusInner: 0.10;"
+                      material="color: #ADD8E6; shader: flat" cursor="maxDistance: 30; fuse: true">
+                <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1"
+                             to="1 1 1" dur="150"></a-animation>
+                <a-animation begin="fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1"
+                             to="0.1 0.1 0.1" dur="1500"></a-animation>
+
+            </a-entity>
+        </a-entity>
+    </a-entity>
+    <a-sky id="background" radius="10" src="#entry"></a-sky>
+</a-scene>
+<script>
+    var frontArrow = document.querySelector('#front-arrow');
+    var backArrow = document.querySelector('#back-arrow');
+     var rightArrow = document.querySelector('#right-arrow');
+      var leftArrow = document.querySelector('#left-arrow');
+
+    var background = document.querySelector('#background');
+    var currentState = 1;
+    setNewValues(currentState);
+
+    frontArrow.addEventListener('click', function () {
+        newState = getNewFrontState(currentState);
+        setNewValues(newState);
+        currentState = newState;
+    });
+
+    backArrow.addEventListener('click', function () {
+        newState = getNewbackState(currentState);
+        setNewValues(newState);
+        currentState = newState;
+    });
+
+rightArrow.addEventListener('click', function () {
+        newState = getNewrightState(currentState);
+        setNewValues(newState);
+        currentState = newState;
+    });
+
+leftArrow.addEventListener('click', function () {
+        newState = getNewleftState(currentState);
+        setNewValues(newState);
+        currentState = newState;
+    });
+
+
+
+
+
+    function setNewValues(newState) {
+        if (newState === 1) {
+            background.setAttribute('src', '#entry');
+            background.setAttribute('rotation', '-1 -90 0');
+        } else if (newState === 2) {
+            background.setAttribute('src', '#left-room');
+         
+        } else if (newState === 3) {
+            background.setAttribute('rotation', '0 90 0');
+            background.setAttribute('src', '#left-corner');
+             
+        } else if (newState === 4) {
+            background.setAttribute('rotation', '0 -90 0');
+            background.setAttribute('src', '#right-corner');
+        } else if (newState === 5) {
+            background.setAttribute('rotation', '0 -90 0');
+            background.setAttribute('src', '#right-room');
+        } else if (newState === 6) {
+            background.setAttribute('src', '#main-block');
+            background.setAttribute('rotation', '0 -90 0');
+        }
+
+          else if (newState === 7) {
+            background.setAttribute('src', '#ground');
+            background.setAttribute('rotation', '-1 -90 0');
+        }
+        else if (newState === 8) {
+            background.setAttribute('src', '#parking');
+            background.setAttribute('rotation', '0 90 0');
+        }
+        else if (newState === 9) {
+            background.setAttribute('src', '#hall');
+            background.setAttribute('rotation', '-1 -90 0');
+        }
+        else if (newState === 10) {
+            background.setAttribute('src', '#canteen-entry');
+            background.setAttribute('rotation', '0 90 0');
+        }
+        else if (newState === 11) {
+            background.setAttribute('src', '#girls-hostel');
+            background.setAttribute('rotation', '0 90 0');
+        }
+        else if (newState === 12) {
+            background.setAttribute('src', '#lab-road');
+            background.setAttribute('rotation', '0 -90 0');
+        }
+        else if (newState === 13) {
+            background.setAttribute('src', '#lab-entry');
+            background.setAttribute('rotation', '0 90 0');
+        }
+        else if (newState === 14) {
+            background.setAttribute('src', '#lab-exit');
+            background.setAttribute('rotation', '0 -90 0');
+        }
+    }
+
+
+    function getNewFrontState(state) {
+        return (state > 14) ? 1 : state + 1;
+    }
+    function getNewbackState(state) {
+        return (state <=1) ? 14 : state -1;
+    }
+
+function getNewrightState(state) {
+        return (state >15) ? 15 : state +1;
+    }
+function getNewleftState(state) {
+        return (state >15) ? 15 : state +1;
+    }
+ 
+    
+</script>
+</body>
+</html>
