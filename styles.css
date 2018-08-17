@@ -5,8 +5,7 @@
 
 #profile_pic
 img {
-    width: auto;
-    height: auto;
+     border-radius: 50%;
 }
 .myheader
 {
